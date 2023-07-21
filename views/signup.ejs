@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 
-<form action="/signup">
+<form action="/signup" method="POST">
   <h2>Sign up</h2>
 
   <label for="email">Email</label>
@@ -11,11 +11,18 @@
   <input type="password" name="password" required />
   <div class="password error"></div>
   
-  <label for="role">Role</label>
-      <select name="role" id="role">
-        <option value="roleStudent">Student</option>
-        <option value="roleTeacher">Teacher</option>
-      </select>
+    <!-- <label for="role">Role</label>
+    <input type="role" name="role" required /> -->
+  
+
+    <label for="role">Role</label>
+    <select name="role" id="role" required>
+      <option value="" disabled selected>Choose role</option>
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+    </select>
+    
+  
       
   <button>Sign up</button>
 </form>
@@ -37,27 +44,27 @@
     // get values
     const email = form.email.value;
     const password = form.password.value;
+    const role = form.role.value;
 
     try {
-      const res = await fetch('/signup', { 
-        method: 'POST', 
-        body: JSON.stringify({ email, password }),
-        headers: {'Content-Type': 'application/json'}
-      });
-      const data = await res.json();
-      console.log(data);
-      if (data.errors) {
-        emailError.textContent = data.errors.email;
-        passwordError.textContent = data.errors.password;
-      }
-      if (data.user) {
-        location.assign('/');
-      }
-
-    }
-    catch (err) {
-      console.log(err);
-    }
+  const res = await fetch('/signup', {
+    method: 'POST',
+    body: JSON.stringify({ email, password, role }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await res.json();
+  console.log(data);
+  if (data.errors) {
+    emailError.textContent = data.errors.email;
+    passwordError.textContent = data.errors.password;
+  }
+  if (data.redirect) {
+    // Redirect the user to the appropriate page based on the 'redirect' value
+    location.assign(data.redirect);
+  }
+} catch (err) {
+  console.log(err);
+}
 
   });
 </script>
