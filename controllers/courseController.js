@@ -56,5 +56,9 @@ const getCoursesByUser = async (req, res) => {
     res.status(500).json({ error: 'Error getting courses by user' });
   }
 };
+// Function to render the course creation page
+const renderCreateCoursePage = (req, res) => {
+    res.render('createCourse'); // Assuming you have an EJS file named createCourse.ejs in the views directory
+  };
 
 module.exports = { createCourse, getAllCourses, getCourseById, getCoursesByUser };
