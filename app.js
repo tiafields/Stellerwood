@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const courseRoutes = require('./routes/courseRoutes'); // Add the courseRoutes
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
@@ -25,3 +26,9 @@ app.get('*', checkUser);
 app.get('/', (req, res) => res.render('home'));
 app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
 app.use(authRoutes);
+app.use(courseRoutes); // Use the courseRoutes
+
+// Home route
+app.get('/', (req, res) => {
+  res.render('index');
+});
