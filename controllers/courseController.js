@@ -1,5 +1,3 @@
-// controllers/courseController.js
-
 const Course = require('../models/Course');
 
 // Function to create a new course
@@ -42,4 +40,21 @@ const getCourseById = async (req, res) => {
   }
 };
 
-module.exports = { createCourse, getAllCourses, getCourseById };
+// Function to get courses by user
+const getCoursesByUser = async (req, res) => {
+  try {
+    // Get the ID of the logged-in user from the auth middleware
+    const userId = req.user._id;
+
+    // Find all courses created by the user
+    const courses = await Course.find({ instructor: userId });
+
+    // Render the teachWelcome page and pass the courses data
+    res.render('teachWelcome', { courses });
+  } catch (error) {
+    console.error('Error getting courses by user:', error);
+    res.status(500).json({ error: 'Error getting courses by user' });
+  }
+};
+
+module.exports = { createCourse, getAllCourses, getCourseById, getCoursesByUser };
