@@ -40,7 +40,8 @@ h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    color: #FCB305;
+   /*  background-color: #FCB305; */
+    color:#FCB305;
 }
 ul {
     margin: 0;

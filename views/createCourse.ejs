@@ -1,24 +1,3 @@
-<!-- createCourse.ejs -->
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Create Course</title>
-</head>
-<body>
-
-  <%- include('partials/navForTeachers'); -%>
-  <!-- Your HTML form for creating a new course goes here -->
-
-  <h1>Create a New Course</h1>
-  <form action="/course" method="POST">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title" required>
-
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" required></textarea>
-
-    <button type="submit">Create Course</button>
-  </form>
-</body>
-</html>
+<!-- THIS PAGE IS NOT NECESSARY ANYMORE, I created a new "create course page called teacherCreateCourse.ejs" -->
+<!-- WE can delete this page, but I kept it here incase it is linking to something else and I did not want to break other pages -->
+<!-- For now this can be empty and we can try to delete it later. -tia   -->
