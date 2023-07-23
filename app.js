@@ -36,11 +36,24 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-//view routes 
+//view routes for teachers
 app.get('/teacherCreateCourse', (req, res) => {
   res.render('teacherCreateCourse');
 });
 
 app.get('/teacherCourseList', (req, res) => {
   res.render('teacherCourseList');
+});
+
+//view routes for students
+app.get('/studWelcome', (req, res) => {
+  res.render('studWelcome');
+});
+
+app.get('/studAddCourse', (req, res) => {
+  res.render('studAddCourse');
+});
+
+app.get('/studViewSched', (req, res) => {
+  res.render('studViewSched');
 });

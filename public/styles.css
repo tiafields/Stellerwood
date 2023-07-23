@@ -255,6 +255,9 @@ header .btn{
   display: inline-block;
   font-size: 0.8em;
 }
+
+/* displays things in grids
+ */
 .recipes{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
