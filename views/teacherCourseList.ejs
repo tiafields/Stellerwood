@@ -1,5 +1,3 @@
-<!-- teacherCourseLIst.ejs -->
-
 <%- include('partials/header'); -%>
 
 <%- include('partials/navForTeachers'); -%>
@@ -8,9 +6,37 @@
     <!-- creating a class for the form to hold the content -->
     <div class="formBackground">
 
-        <div class="form-containter">
-
+        <div class="form-container">
             <h1>Course List</h1>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Description</th>
+                        <th>Subject Area</th>
+                        <th>Credit Hours</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% courses.forEach(course => { %>
+                        <tr>
+                            <td><%= course.createCourseID %></td>
+                            <td><%= course.createCourseName %></td>
+                            <td><%= course.createCourseDescription %></td>
+                            <td><%= course.createSubjectArea %></td>
+                            <td><%= course.createNumOfCreditHours %></td>
+                            <td>
+                                <!-- Add buttons or links for editing or deleting the course -->
+                                <a href="/edit-course/<%= course._id %>">Edit</a>
+                                <a href="/delete-course/<%= course._id %>">Delete</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
