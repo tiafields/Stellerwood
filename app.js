@@ -49,3 +49,6 @@ app.get('/studAddCourse', (req, res) => {
   res.render('studAddCourse');
 });
 
+app.get('/studViewSched', (req, res) => {
+  res.render('studViewSched');
+});
