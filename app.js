@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courseRoutes'); // Add the courseRoutes
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const { createCourse } = require('./controllers/courseController');
 
 const app = express();
 
@@ -32,5 +33,27 @@ app.use(courseRoutes); // Use the courseRoutes
 
 // Home route
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('home');
+});
+
+//view routes for teachers
+app.get('/teacherCreateCourse', (req, res) => {
+  res.render('teacherCreateCourse');
+});
+
+app.get('/teacherCourseList', (req, res) => {
+  res.render('teacherCourseList');
+});
+
+//view routes for students
+app.get('/studWelcome', (req, res) => {
+  res.render('studWelcome');
+});
+
+app.get('/studAddCourse', (req, res) => {
+  res.render('studAddCourse');
+});
+
+app.get('/studViewSched', (req, res) => {
+  res.render('studViewSched');
 });

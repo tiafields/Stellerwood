@@ -40,7 +40,8 @@ h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    color: #FCB305;
+   /*  background-color: #FCB305; */
+    color:#FCB305;
 }
 ul {
     margin: 0;
@@ -52,13 +53,16 @@ li {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    color: #444;
+    color: #FCB305;
 }
 a {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    color: #FCB305;
+    color: #00017A;
+    background-color: #FCB305;
+    border-radius: 20px;
+    padding: 8px 15px; 
 }
 p{
     margin: 0;
@@ -139,7 +143,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 120px;
+  margin-bottom: 80px;
 }
 nav ul{
   display: flex;
@@ -156,6 +160,26 @@ nav li a{
   padding: 10px 16px;
   letter-spacing: 2px;
 }
+/* navForTeachers  */
+.teacherNavBar{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px;
+ /*  background-color: #FCB305; */
+  color: #00017A;
+  font-style: bold;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1em;
+  padding: 1px 1px;
+  letter-spacing: 2px;
+}
+.teacherNavBar ul{
+  display: flex;
+  align-items: center;
+}
+
 .signUpBTN{
   border-radius: 36px;
   background: #FEC203;
@@ -207,6 +231,7 @@ button{
 header{
   display: flex;
   align-items: center;
+  margin-bottom:20px;
 }
 header img{
   width: 250px;
@@ -230,6 +255,9 @@ header .btn{
   display: inline-block;
   font-size: 0.8em;
 }
+
+/* displays things in grids
+ */
 .recipes{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -254,4 +282,36 @@ footer{
   text-align: center;
   margin-top: 120px;
   color: #FCB305;
+}
+
+
+.create-course form{
+  max-width: 400px;
+  margin: 0 auto;
+}
+.create-course input,
+.create-course textarea{
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+.create-course label{
+  display: block;
+  margin-top: 24px;
+  color: #FCB305;
+  font-style: bold;
+}
+textarea{
+  height: 120px;
+}
+.create-course button{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #FCB305;
+  color: #00017A;
+  padding: 6px;
+  border: 0;
+  font-size: .9em;
+  cursor: pointer;
 }

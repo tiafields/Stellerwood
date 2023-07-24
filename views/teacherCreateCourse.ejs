@@ -1,0 +1,41 @@
+<!-- teacherCourseLIst.ejs -->
+
+<%- include('partials/header'); -%>
+
+<%- include('partials/navForTeachers'); -%>
+
+<div class="container">
+    <!-- creating a class for the form to hold the content -->
+    <div class="formBackground">
+
+        <div class="form-containter">
+            <div class="create-course">
+            <h1>Create a Course</h1><br>
+
+            <lable for="createCourseID">Couse ID</lable>
+            <input type="text" id="createCourseID" name ="createCourseID" required>
+
+            <label for="createCourseName">Course Name</label>
+            <input type="text" id="createCourseName" name="createCourseName" required>
+
+            <label for="createCourseDescription">Description</label>
+            <textarea id="body" name = "createCourseDescription" required></textarea>
+
+            <lable for="createSubjectArea">Subject Area</lable>
+            <input type="text" id="createSubjectArea" name ="createSubjectArea" required>
+
+            <lable for="createNumOfCreditHours"># Credit Hours</lable>
+            <input type="text" id="createNumOfCreditHours" name ="createNumOfCreditHours" required>
+
+            <button>Add Course</button>
+            
+        </form> 
+    </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>
