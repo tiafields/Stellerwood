@@ -6,6 +6,18 @@ const Course = require('../models/Course'); //
 
 const router = Router();
 
+// Add this route to the courseRoutes file
+router.get('/studentCourseList', async (req, res) => {
+    try {
+      const courses = await Course.find(); // Fetch the list of courses from the database
+      res.render('studentCourseList', { courses }); // Pass the courses data to the template
+    } catch (error) {
+      console.error('Error getting courses:', error);
+      res.status(500).json({ error: 'Error getting courses' });
+    }
+  });
+  
+
 
 router.post('/createCourse', requireAuth, checkRole, courseController.createCourse);
 

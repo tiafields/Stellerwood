@@ -1,4 +1,4 @@
-<!-- studWelcom.ejs -->
+<!-- studViewSched.ejs -->
 
 <%- include('partials/header'); -%>
 
@@ -10,9 +10,36 @@
 
         <div class="form-containter">
 
-            <h1>View Schedule  </h1>
+            <h1>View Schedule</h1>
+
+            <!-- Add a section to display the list of courses -->
+            <div class="course-list">
+                <h2>Available Courses</h2>
+                <ul>
+                    <% courses.forEach(course => { %>
+                    <li>
+                        Course ID: <%= course.createCourseID %><br>
+                        Course Name: <%= course.createCourseName %><br>
+                        Description: <%= course.createCourseDescription %><br>
+                        Subject Area: <%= course.createSubjectArea %><br>
+                        Credit Hours: <%= course.createNumOfCreditHours %><br>
+                        <!-- Add the button to add the course to the schedule here -->
+                        <button onclick="addToSchedule('<%= course._id %>')">Add to Schedule</button>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
 <%- include('partials/footer'); -%>
+
+<script>
+    function addToSchedule(courseId) {
+        // Implement the logic to add the course to the student's schedule
+        // You can use AJAX or fetch() to send a request to the server to handle the addition
+        // For simplicity, you can log the courseId to the console for now
+        console.log('Adding course to schedule:', courseId);
+    }
+</script>
