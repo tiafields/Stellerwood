@@ -23,11 +23,11 @@
                 <tbody>
                     <% courses.forEach(course => { %>
                         <tr>
-                            <td><%= course.createCourseID %></td>
-                            <td><%= course.createCourseName %></td>
-                            <td><%= course.createCourseDescription %></td>
-                            <td><%= course.createSubjectArea %></td>
-                            <td><%= course.createNumOfCreditHours %></td>
+                            <td><%= course.id %></td>
+                            <td><%= course.name %></td>
+                            <td><%= course.description %></td>
+                            <td><%= course.subject %></td>
+                            <td><%= course.creditHours %></td>
                             <td>
                                 <!-- Add buttons or links for editing or deleting the course -->
                                 <a href="/edit-course/<%= course._id %>">Edit</a>

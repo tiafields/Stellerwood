@@ -12,23 +12,24 @@
             <div class="create-course">
                 <h1>Create a Course</h1><br>
 
-                <lable for="createCourseID">Couse ID</lable>
-                <input type="text" id="createCourseID" name ="createCourseID" required>
+                <form id="createCourseForm">
+                    <label for="createCourseID">Couse ID</label>
+                    <input type="text" id="createCourseID" name ="createCourseID" required>
 
-                <label for="createCourseName">Course Name</label>
-                <input type="text" id="createCourseName" name="createCourseName" required>
+                    <label for="createCourseName">Course Name</label>
+                    <input type="text" id="createCourseName" name="createCourseName" required>
 
-                <label for="createCourseDescription">Description</label>
-                <textarea id="body" name = "createCourseDescription" required></textarea>
+                    <label for="createCourseDescription">Description</label>
+                    <textarea id="createCourseDescription" name = "createCourseDescription" required></textarea>
 
-                <lable for="createSubjectArea">Subject Area</lable>
-                <input type="text" id="createSubjectArea" name ="createSubjectArea" required>
+                    <label for="createSubjectArea">Subject Area</label>
+                    <input type="text" id="createSubjectArea" name ="createSubjectArea" required>
 
-                <lable for="createNumOfCreditHours"># Credit Hours</lable>
-                <input type="text" id="createNumOfCreditHours" name ="createNumOfCreditHours" required>
+                    <label for="createNumOfCreditHours"># Credit Hours</label>
+                    <input type="number" id="createNumOfCreditHours" name ="createNumOfCreditHours" required>
 
-                <button>Add Course</button>
-            
+                    <button type="submit">Add Course</button>
+                </form>
         
             </div>
         </div>
@@ -37,3 +38,40 @@
 
 <%- include('partials/footer'); -%>
 
+<script>
+    const form = document.querySelector('form');
+    const courseIDElement = document.querySelector('#createCourseID');
+    const courseNameElement = document.querySelector('#createCourseName');
+    const courseDescriptionElement = document.querySelector('#createCourseDescription');
+    const courseSubjectElement = document.querySelector('#createSubjectArea');
+    const courseHoursElement = document.querySelector('#createNumOfCreditHours');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const id = courseIDElement.value;
+        const name = courseNameElement.value;
+        const description = courseDescriptionElement.value;
+        const subject = courseSubjectElement.value;
+        const creditHours = Number(courseHoursElement.value);
+
+        try {
+            const res = await fetch('/createCourse', {
+                method: 'POST',
+                body: JSON.stringify({ 
+                    id,
+                    name,
+                    description,
+                    subject,
+                    creditHours,
+                 }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            const course = await res.json();
+            console.log(course);
+            window.location.assign('/teacherCourseList');
+        } catch (err) {
+            console.log(err);
+        }
+    });
+</script>

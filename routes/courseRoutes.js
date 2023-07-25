@@ -6,9 +6,7 @@ const Course = require('../models/Course'); //
 
 const router = Router();
 
-
-router.post('/createCourse', requireAuth, checkRole, courseController.createCourse);
-
+router.post('/createCourse', requireAuth, checkRole('teacher'), courseController.createCourse);
 
 // Route to create a new course
 router.post('/course', requireAuth, courseController.createCourse);
@@ -23,7 +21,7 @@ router.get('/course/:id', courseController.getCourseById);
 router.get('/teachWelcome', requireAuth, courseController.getCoursesByUser);
 
 // Route to render the course creation page (GET request)
-router.get('/createCourse', requireAuth, checkRole, (req, res) => {
+router.get('/createCourse', requireAuth, checkRole('teacher'), (req, res) => {
     res.render('createCourse'); // Assuming you have a view called 'createCourse' to render the page
   });
 
@@ -35,6 +33,16 @@ try {
     console.error('Error getting courses:', error);
     res.status(500).json({ error: 'Error getting courses' });
 }
+});
+
+router.get('/delete-course/:courseID', requireAuth, checkRole('teacher'), async (req, res) => {
+    try {
+        await Course.findByIdAndRemove(req.params.courseID);
+        res.redirect('/teacherCourseList');
+    } catch (error) {
+        console.error('Error deleting course', req.params.courseID, error);
+        res.status(500).json({ error: 'Error deleting courses' });
+    }
 });
   
 

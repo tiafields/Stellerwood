@@ -2,10 +2,18 @@ const Course = require('../models/Course');
 
 // Function to create a new course
 const createCourse = async (req, res) => {
-    const { createCourseID, createCourseName, createCourseDescription, createSubjectArea, createNumOfCreditHours } = req.body;
+  const { id, name, description, subject, creditHours } = req.body;
+  const instructor = req.user?._id?.toString();
 
   try {
-    const newCourse = await Course.create({ createCourseID, createCourseName, createCourseDescription, createSubjectArea, createNumOfCreditHours});
+    const newCourse = await Course.create({
+      id,
+      name,
+      description,
+      subject,
+      creditHours,
+      instructor,
+    });
     res.status(201).json({ course: newCourse });
   } catch (error) {
     console.error('Error creating course:', error);
