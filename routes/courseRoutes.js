@@ -2,25 +2,20 @@ const { Router } = require('express');
 const courseController = require('../controllers/courseController');
 const { requireAuth } = require('../middleware/authMiddleware');
 const { checkRole } = require('../middleware/courseMiddleware');
-const Course = require('../models/Course'); // 
+const Course = require('../models/Course');
 
 const router = Router();
 
-// Add this route to the courseRoutes file
+// Route to render the student course list page
 router.get('/studentCourseList', async (req, res) => {
-    try {
-      const courses = await Course.find(); // Fetch the list of courses from the database
-      res.render('studentCourseList', { courses }); // Pass the courses data to the template
-    } catch (error) {
-      console.error('Error getting courses:', error);
-      res.status(500).json({ error: 'Error getting courses' });
-    }
-  });
-  
-
-
-router.post('/createCourse', requireAuth, checkRole, courseController.createCourse);
-
+  try {
+    const courses = await Course.find();
+    res.render('studentCourseList', { courses });
+  } catch (error) {
+    console.error('Error getting courses:', error);
+    res.status(500).json({ error: 'Error getting courses' });
+  }
+});
 
 // Route to create a new course
 router.post('/course', requireAuth, courseController.createCourse);
@@ -36,19 +31,19 @@ router.get('/teachWelcome', requireAuth, courseController.getCoursesByUser);
 
 // Route to render the course creation page (GET request)
 router.get('/createCourse', requireAuth, checkRole, (req, res) => {
-    res.render('createCourse'); // Assuming you have a view called 'createCourse' to render the page
-  });
+  res.render('createCourse'); // Assuming you have a view called 'createCourse' to render the page
+});
 
+// Route to render the teacher course list page
 router.get('/teacherCourseList', async (req, res) => {
-try {
-    const courses = await Course.find(); // Fetch the list of courses from the database
-    res.render('teacherCourseList', { courses }); // Pass the courses data to the template
-} catch (error) {
+  try {
+    const courses = await Course.find();
+    res.render('teacherCourseList', { courses });
+  } catch (error) {
     console.error('Error getting courses:', error);
     res.status(500).json({ error: 'Error getting courses' });
-}
+  }
 });
-  
 
 // Add more routes as needed, such as updating and deleting courses
 

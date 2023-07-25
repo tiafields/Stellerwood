@@ -3,15 +3,16 @@ const Course = require('../models/Course');
 // Function to create a new course
 const createCourse = async (req, res) => {
     const { createCourseID, createCourseName, createCourseDescription, createSubjectArea, createNumOfCreditHours } = req.body;
-
-  try {
-    const newCourse = await Course.create({ createCourseID, createCourseName, createCourseDescription, createSubjectArea, createNumOfCreditHours});
-    res.status(201).json({ course: newCourse });
-  } catch (error) {
-    console.error('Error creating course:', error);
-    res.status(500).json({ error: 'Error creating course' });
-  }
-};
+  
+    try {
+      const newCourse = await Course.create({ createCourseID, createCourseName, createCourseDescription, createSubjectArea, createNumOfCreditHours });
+      res.status(201).json({ course: newCourse });
+    } catch (error) {
+      console.error('Error creating course:', error);
+      res.status(500).json({ error: 'Error creating course' });
+    }
+  };
+  
 
 // Function to get all courses
 const getAllCourses = async (req, res) => {
@@ -40,7 +41,7 @@ const getCourseById = async (req, res) => {
   }
 };
 
-// Function to get courses by user
+// Function to get courses created by a specific user (teacher)
 const getCoursesByUser = async (req, res) => {
   try {
     // Get the ID of the logged-in user from the auth middleware
@@ -56,9 +57,7 @@ const getCoursesByUser = async (req, res) => {
     res.status(500).json({ error: 'Error getting courses by user' });
   }
 };
-// Function to render the course creation page
-const renderCreateCoursePage = (req, res) => {
-    res.render('createCourse'); // Assuming you have an EJS file named createCourse.ejs in the views directory
-  };
+
+// Add more functions as needed
 
 module.exports = { createCourse, getAllCourses, getCourseById, getCoursesByUser };

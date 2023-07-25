@@ -1,0 +1,12 @@
+// Just like you have a Course model for teacher-created courses, 
+// you'll need a similar model for student-created courses. 
+// Let's call it StudentCourse.
+
+// Route to create a new student-created course
+router.post('/studentCourse', requireAuth, courseController.createStudentCourse);
+
+// Route to get all student-created courses for a specific student
+router.get('/studentCourses', requireAuth, courseController.getStudentCoursesByUser);
+
+// Route to delete a student-created course
+router.delete('/studentCourse/:id', requireAuth, courseController.deleteStudentCourse);
