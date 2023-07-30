@@ -1,6 +1,10 @@
 <%- include('partials/header'); -%>
 
-<%- include('partials/navForTeachers'); -%>
+<% if (user.role === 'teacher') { %> 
+    <%- include('partials/navForTeachers'); -%>
+<% } else { %> 
+    <%- include('partials/navForStudents'); -%>
+<% } %> 
 
 <div class="container">
     <!-- creating a class for the form to hold the content -->
@@ -18,7 +22,17 @@
                     
                 </div>
                 <br>
-                <a class="delete" data-doc="<%= course.id %>">Delete</a> 
+                <% if (user.role === 'teacher') { %> 
+                    <button class="delete" id="delete-course" data-doc="<%= course.id %>">Delete</button> 
+                <% } else { %> 
+                    <% if (user.schedule?.includes(course._id)) { %>
+                        <button class="delete" id="remove-course" data-doc="<%= course.id %>">Remove course</button> 
+                    <% } else { %> 
+                        <button class="delete" id="add-course" data-doc="<%= course.id %>">Add course</button> 
+                    <% } %> 
+                <% } %> 
+    
+                
                 <!-- making a class for edit  -->
                 <!-- <a class="edit" data-doc=" blog.id %>">Edit</a> -->
         </div>
@@ -29,18 +43,44 @@
 
 <script>
     //grabbing the class  of a classs= delete
-    const trashcan = document.querySelector('a.delete');
-    trashcan.addEventListener('click', (e) => {
-        const endpoint = `/courses/${trashcan.dataset.doc}`;
+    const trashcan = document.querySelector('#delete-course');
+    const addButton = document.querySelector('#add-course');
+    const removeButotn = document.querySelector('#remove-course');
+    if (trashcan) {
+        trashcan.addEventListener('click', (e) => {
+            const endpoint = `/courses/${trashcan.dataset.doc}`;
 
-        //sending delete request to endpoint 
-        fetch(endpoint, {
-            method: 'DELETE'
+            //sending delete request to endpoint 
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response) => response.json())
+            .then((data) => window.location.href = data.redirect)
+            .catch(err => console.log(err));
         })
-        .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
-        .catch(err => console.log(err));
-    })
+    }
+    if (addButton) {
+        addButton.addEventListener('click', (e) => {
+            const endpoint = `/student/<%= user._id%>/add-course/${addButton.dataset.doc}`;
+
+            fetch(endpoint, {
+                method: 'POST'
+            })
+            .then(() => location.reload())
+            .catch(err => console.log(err));
+        })
+    }
+    if (removeButotn) {
+        removeButotn.addEventListener('click', (e) => {
+            const endpoint = `/student/<%= user._id%>/remove-course/${removeButotn.dataset.doc}`;
+
+            fetch(endpoint, {
+                method: 'POST'
+            })
+            .then(() => location.reload())
+            .catch(err => console.log(err));
+        })
+    }
 </script>
 
 </body>

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 // handle errors
 const handleErrors = (err) => {
@@ -56,7 +57,9 @@ module.exports.signup_post = async (req, res) => {
   const { email, password, role } = req.body; // Get the role from the request body
 
   try {
-    const user = await User.create({ email, password, role }); // Save the role in the database
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(password, salt);
+    const user = await User.create({ email, password: hash, role }); // Save the role in the database
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
 

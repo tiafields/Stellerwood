@@ -335,3 +335,7 @@ textarea{
 .course-description {
   color: #00017A;
 }
+
+.stud-course {
+  display: block;
+}
