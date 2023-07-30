@@ -1,0 +1,60 @@
+<%- include('partials/header'); -%>
+
+<%- include('partials/navForTeachers'); -%>
+
+<div class="container">
+    <!-- creating a class for the form to hold the content -->
+    <div class="formBackground">
+
+        <div class="form-container">
+            <h1>Course List</h1>
+
+            <% if (courses.length > 0) { %> 
+                <% courses.forEach(course => { %>
+                   <!-- getting the individual id of each course, surrounding with an anchor tag and getting id of course-->
+                   <a href="/courses/<%= course._id %>">
+                   <h3 class="course-name"><%= course.teachCourseName %></h3>
+                   <p><%= course.teachCourseDescription %></p>
+                    </a>    <br>
+                <% }) %> 
+               <% } else { %>
+   
+                   <p>There are no courses to display...</p>
+               
+               <% } %> 
+
+           <!--  <table>
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Description</th>
+                        <th>Subject Area</th>
+                        <th>Credit Hours</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% courses.forEach(course => { %>
+                        <tr>
+                            <td><%= course.id %></td>
+                            <td><%= course.name %></td>
+                            <td><%= course.description %></td>
+                            <td><%= course.subject %></td>
+                            <td><%= course.creditHours %></td>
+                            <td>
+                                
+                                <a href="/edit-course/<%= course._id %>">Edit</a>
+                                <a href="/delete-course/<%= course._id %>">Delete</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+
+                </tbody>
+            </table> -->
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>

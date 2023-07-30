@@ -12,22 +12,22 @@
             <div class="create-course">
                 <h1>Create a Course</h1><br>
 
-                <form id="createCourseForm">
-                    <label for="createCourseID">Couse ID</label>
-                    <input type="text" id="createCourseID" name ="createCourseID" required>
-
-                    <label for="createCourseName">Course Name</label>
-                    <input type="text" id="createCourseName" name="createCourseName" required>
-
-                    <label for="createCourseDescription">Description</label>
-                    <textarea id="createCourseDescription" name = "createCourseDescription" required></textarea>
-
-                    <label for="createSubjectArea">Subject Area</label>
-                    <input type="text" id="createSubjectArea" name ="createSubjectArea" required>
-
-                    <label for="createNumOfCreditHours"># Credit Hours</label>
-                    <input type="number" id="createNumOfCreditHours" name ="createNumOfCreditHours" required>
-
+                <form action ="/courses" method = "POST">
+                    <lable for ="teachCourseID">Course ID</lable>
+                    <input type = "text" id= "teachCourseID" name="teachCourseID" required>
+    
+                    <lable for ="teachCourseName">Course Name</lable>
+                    <input type = "text" id= "teachCourseName" name="teachCourseName" required>
+    
+                    <lable for ="teachCourseDescription">Course Description</lable>
+                    <input type = "text" id= "teachCourseDescription" name="teachCourseDescription" required>
+    
+                    <lable for ="teachCourseSubjectArea">Subject Area</lable>
+                    <input type = "text" id= "teachCourseSubjectArea" name="teachCourseSubjectArea" required>
+    
+                    <lable for ="teachCourseCreditHours"># Credit Hours</lable>
+                    <input type = "number" id= "teachCourseCreditHours" name="teachCourseCreditHours"required>
+    
                     <button type="submit">Add Course</button>
                 </form>
         
@@ -38,7 +38,7 @@
 
 <%- include('partials/footer'); -%>
 
-<script>
+<!-- <script>
     const form = document.querySelector('form');
     const courseIDElement = document.querySelector('#createCourseID');
     const courseNameElement = document.querySelector('#createCourseName');
@@ -74,4 +74,4 @@
             console.log(err);
         }
     });
-</script>
+</script> -->

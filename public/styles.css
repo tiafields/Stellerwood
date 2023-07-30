@@ -17,6 +17,7 @@ body{
   align-items: center;
 }
 
+
 .formBackground{
   border: 5px solid #FEC203;
   background: #151EA6;
@@ -314,4 +315,8 @@ textarea{
   border: 0;
   font-size: .9em;
   cursor: pointer;
+}
+
+.course-name {
+  color: #654701;
 }

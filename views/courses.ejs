@@ -9,7 +9,21 @@
         <div class="form-container">
             <h1>Course List</h1>
 
-            <table>
+            <% if (courses.length > 0) { %> 
+                <% courses.forEach(course => { %>
+                   <!-- getting the individual id of each course, surrounding with an anchor tag and getting id of course-->
+                   <a href="/courses/<%= course._id %>">
+                   <h3><%= course.teachCourseName %></h3>
+                   <p><%= course.teachCourseDescription %></p>
+                    </a>    <br>
+                <% }) %> 
+               <% } else { %>
+   
+                   <p>There are no courses to display...</p>
+               
+               <% } %> 
+
+           <!--  <table>
                 <thead>
                     <tr>
                         <th>Course ID</th>
@@ -30,7 +44,7 @@
                             <td><%= course.subject %></td>
                             <td><%= course.creditHours %></td>
                             <td>
-                                <!-- Add buttons or links for editing or deleting the course -->
+                                
                                 <a href="/edit-course/<%= course._id %>">Edit</a>
                                 <a href="/delete-course/<%= course._id %>">Delete</a>
                             </td>
@@ -38,7 +52,7 @@
                     <% }); %>
 
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </div>
 </div>

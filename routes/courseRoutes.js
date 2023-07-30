@@ -2,7 +2,7 @@ const { Router } = require('express');
 const courseController = require('../controllers/courseController');
 const { requireAuth } = require('../middleware/authMiddleware');
 const { checkRole } = require('../middleware/courseMiddleware');
-const Course = require('../models/Course'); // 
+const Course = require('../models/courses'); // 
 
 const router = Router();
 
