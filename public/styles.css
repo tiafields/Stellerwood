@@ -69,7 +69,7 @@ p{
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    color: #444;
+    color:#FCB305;
 }
 input {
     margin: 0;
@@ -107,6 +107,17 @@ input[type="submit"], button {
   border-radius: 5px;
   background-color: #f2f2f2;
   cursor: pointer;
+}
+
+
+.course-link
+
+/* CSS */
+.course-link {
+  /* Your styles go here */
+  color: blue;
+  text-decoration: underline;
+  /* Add any other styles you want to apply to this class */
 }
 
 button {
@@ -318,5 +329,9 @@ textarea{
 }
 
 .course-name {
-  color: #654701;
+  color: #00017A;
+}
+
+.course-description {
+  color: #00017A;
 }

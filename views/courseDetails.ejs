@@ -3,19 +3,26 @@
 <%- include('partials/navForTeachers'); -%>
 
 <div class="container">
-    <h2> <%= course.teachCourseName %> </h2>
+    <!-- creating a class for the form to hold the content -->
+    <div class="formBackground">
 
-    <div class = "content">
-        <p><strong>Course ID: </strong><%= course.teachCourseID %> </p><br>
-        <p><strong>Number of Credit Hours: </strong><%= course.teachCourseCreditHours %> </p><br>
-        <p><strong>Subject Area: </strong><%= course.teachCourseSubjectArea %> </p><br>
-        <p><strong>Course Description: </strong><%= course.teachCourseDescription %> </p><br>
-        
+        <div class="form-container">
+
+            <h2> <%= course.teachCourseName %> </h2><br>
+
+                <div class = "content">
+                    <p><strong>Course ID: </strong><%= course.teachCourseID %> </p><br>
+                    <p><strong>Number of Credit Hours: </strong><%= course.teachCourseCreditHours %> </p><br>
+                    <p><strong>Subject Area: </strong><%= course.teachCourseSubjectArea %> </p><br>
+                    <p><strong>Course Description: </strong><%= course.teachCourseDescription %> </p><br>
+                    
+                </div>
+                <br>
+                <a class="delete" data-doc="<%= course.id %>">Delete</a> 
+                <!-- making a class for edit  -->
+                <!-- <a class="edit" data-doc=" blog.id %>">Edit</a> -->
+        </div>
     </div>
-    <br>
-    <a class="delete" data-doc="<%= course.id %>">Delete</a> 
-    <!-- making a class for edit  -->
-    <!-- <a class="edit" data-doc=" blog.id %>">Edit</a> -->
 </div>
 
 <%- include('./partials/footer.ejs')%>
