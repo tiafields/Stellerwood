@@ -2,12 +2,144 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 body{
-  margin: 20px 40px;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-  background: #fafafa;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+  font-family: 'Noto Serif', serif;
+  max-width: 1200px;
+  background-color: #00017A;
+  color: #FCB305;
 }
-h1, h2, h3, h4, ul, li, a, p, input, label, button, div, footer{
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.formBackground{
+  border: 5px solid #FEC203;
+  background: #151EA6;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 1200px;
+  min-height: 600px; 
+  max-height: none;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: center;}
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+   /*  background-color: #FCB305; */
+    color:#FCB305;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #444;
+}
+li {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #FCB305;
+}
+a {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #00017A;
+    background-color: #FCB305;
+    border-radius: 20px;
+    padding: 8px 15px; 
+}
+p{
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color:#FCB305;
+}
+input {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #444;
+}
+label {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #444;
+}
+
+/* Styling for the "Role" section */
+label[for="role"], select#role, input[type="submit"], button {
+  margin: 10px 0;
+}
+
+select#role {
+  padding: 5px 10px;
+  font-family: 'Quicksand', sans-serif;
+  color: #444;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  width: 150px; /* Adjust the width as needed */
+}
+
+input[type="submit"], button {
+  padding: 5px 10px;
+  font-family: 'Quicksand', sans-serif;
+  color: #444;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+
+.course-link
+
+/* CSS */
+.course-link {
+  /* Your styles go here */
+  color: blue;
+  text-decoration: underline;
+  /* Add any other styles you want to apply to this class */
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #444;
+  }
+div{
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  color: #fcb305;
+}
+
+footer{
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
@@ -23,7 +155,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 120px;
+  margin-bottom: 80px;
 }
 nav ul{
   display: flex;
@@ -40,9 +172,30 @@ nav li a{
   padding: 10px 16px;
   letter-spacing: 2px;
 }
-.btn{
+/* navForTeachers  */
+.teacherNavBar{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px;
+ /*  background-color: #FCB305; */
+  color: #00017A;
+  font-style: bold;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1em;
+  padding: 1px 1px;
+  letter-spacing: 2px;
+}
+.teacherNavBar ul{
+  display: flex;
+  align-items: center;
+}
+
+.signUpBTN{
   border-radius: 36px;
-  background: #FEE996;
+  background: #FEC203;
+  color:#00017A;
 }
 form h2{
   font-size: 2.4em;
@@ -64,6 +217,7 @@ input{
   font-size: 1em;
   width: 100%;
 }
+
 label{
   display: block;
   margin: 20px 0 10px;
@@ -71,7 +225,7 @@ label{
 button{
   margin-top: 30px;
   border-radius: 36px;
-  background: #FEE996;
+  background: #FEC203;
   border:0;
   text-transform: uppercase;
   font-weight: 700;
@@ -81,7 +235,7 @@ button{
   letter-spacing: 2px;
 }
 .error{
-  color: #ff0099;
+  color: #00017A;
   margin: 10px 2px;
   font-size: 0.8em;
   font-weight: bold;
@@ -89,6 +243,7 @@ button{
 header{
   display: flex;
   align-items: center;
+  margin-bottom:20px;
 }
 header img{
   width: 250px;
@@ -112,6 +267,9 @@ header .btn{
   display: inline-block;
   font-size: 0.8em;
 }
+
+/* displays things in grids
+ */
 .recipes{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -135,5 +293,45 @@ header .btn{
 footer{
   text-align: center;
   margin-top: 120px;
-  color: #aaa;
+  color: #FCB305;
+}
+
+
+.create-course form{
+  max-width: 400px;
+  margin: 0 auto;
+}
+.create-course input,
+.create-course textarea{
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+.create-course label{
+  display: block;
+  margin-top: 24px;
+  color: #FCB305;
+  font-style: bold;
+}
+textarea{
+  height: 120px;
+}
+.create-course button{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #FCB305;
+  color: #00017A;
+  padding: 6px;
+  border: 0;
+  font-size: .9em;
+  cursor: pointer;
+}
+
+.course-name {
+  color: #00017A;
+}
+
+.course-description {
+  color: #00017A;
 }

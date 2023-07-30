@@ -1,0 +1,32 @@
+<%- include('partials/header'); -%>
+
+<%- include('partials/navForTeachers'); -%>
+
+<div class="container">
+    <!-- creating a class for the form to hold the content -->
+    <div class="formBackground">
+
+        <div class="form-container">
+            <h1>Course List</h1>
+
+            
+            <% if (courses.length > 0) { %> 
+                <% courses.forEach(course => { %>
+                   <!-- getting the individual id of each course, surrounding with an anchor tag and getting id of course-->
+                   <a href="/courses/<%= course._id %>" class = "course-link">
+                   <h3><%= course.teachCourseName %></h3>
+                   <p class="course-description"><%= course.teachCourseDescription %></p>
+
+                    </a>    <br>
+                <% }) %> 
+               <% } else { %>
+   
+                   <p>There are no courses to display...</p>
+               
+               <% } %> 
+
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>

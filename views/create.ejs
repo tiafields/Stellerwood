@@ -1,0 +1,77 @@
+<!-- teacherCreateCourse.ejs -->
+
+<%- include('partials/header'); -%>
+
+<%- include('partials/navForTeachers'); -%>
+
+<div class="container">
+    <!-- creating a class for the form to hold the content -->
+    <div class="formBackground">
+
+        <div class="form-containter">
+            <div class="create-course">
+                <h1>Create a Course</h1><br>
+
+                <form action ="/courses" method = "POST">
+                    <lable for ="teachCourseID">Course ID</lable>
+                    <input type = "text" id= "teachCourseID" name="teachCourseID" required>
+    
+                    <lable for ="teachCourseName">Course Name</lable>
+                    <input type = "text" id= "teachCourseName" name="teachCourseName" required>
+    
+                    <lable for ="teachCourseDescription">Course Description</lable>
+                    <input type = "text" id= "teachCourseDescription" name="teachCourseDescription" required>
+    
+                    <lable for ="teachCourseSubjectArea">Subject Area</lable>
+                    <input type = "text" id= "teachCourseSubjectArea" name="teachCourseSubjectArea" required>
+    
+                    <lable for ="teachCourseCreditHours"># Credit Hours</lable>
+                    <input type = "number" id= "teachCourseCreditHours" name="teachCourseCreditHours"required>
+    
+                    <button type="submit">Add Course</button>
+                </form>
+        
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>
+
+<!-- <script>
+    const form = document.querySelector('form');
+    const courseIDElement = document.querySelector('#createCourseID');
+    const courseNameElement = document.querySelector('#createCourseName');
+    const courseDescriptionElement = document.querySelector('#createCourseDescription');
+    const courseSubjectElement = document.querySelector('#createSubjectArea');
+    const courseHoursElement = document.querySelector('#createNumOfCreditHours');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const id = courseIDElement.value;
+        const name = courseNameElement.value;
+        const description = courseDescriptionElement.value;
+        const subject = courseSubjectElement.value;
+        const creditHours = Number(courseHoursElement.value);
+
+        try {
+            const res = await fetch('/createCourse', {
+                method: 'POST',
+                body: JSON.stringify({ 
+                    id,
+                    name,
+                    description,
+                    subject,
+                    creditHours,
+                 }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            const course = await res.json();
+            console.log(course);
+            window.location.assign('/teacherCourseList');
+        } catch (err) {
+            console.log(err);
+        }
+    });
+</script> -->

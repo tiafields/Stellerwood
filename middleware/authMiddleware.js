@@ -6,16 +6,20 @@ const requireAuth = (req, res, next) => {
 
   // check json web token exists & is verified
   if (token) {
-    jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
+    jwt.verify(token, 'net ninja secret', async (err, decodedToken) => {
       if (err) {
         console.log(err.message);
+        req.user = null;
         res.redirect('/login');
       } else {
         console.log(decodedToken);
+        let user = await User.findById(decodedToken.id);
+        req.user = user;
         next();
       }
     });
   } else {
+    req.user = null;
     res.redirect('/login');
   }
 };

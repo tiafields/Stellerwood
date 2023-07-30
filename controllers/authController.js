@@ -53,20 +53,27 @@ module.exports.login_get = (req, res) => {
 }
 
 module.exports.signup_post = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body; // Get the role from the request body
 
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({ email, password, role }); // Save the role in the database
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ user: user._id });
-  }
-  catch(err) {
+
+    let redirect;
+    if (role === 'teacher') {
+      redirect = '/teachWelcome'; // Redirect to the teacher welcome page
+    } else {
+      redirect = '/studWelcome'; // Redirect to the student welcome page
+    }
+
+    res.status(201).json({ user: user._id, redirect });
+
+  } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
- 
-}
+};
 
 module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
@@ -74,15 +81,32 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
+
+    // Determine the role of the user
+    let role;
+    if (user.role === 'teacher') {
+      role = 'teacher';
+    } else {
+      role = 'student';
+    }
+
+    // Set the redirect URL based on the user's role
+    let redirect;
+    if (role === 'teacher') {
+      redirect = '/teachWelcome'; // Replace with the actual URL for teachers
+    } else {
+      redirect = '/studWelcome'; // Replace with the actual URL for students
+    }
+
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ user: user._id });
+    res.status(200).json({ user: user._id, redirect });
   } 
   catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
-
 }
+
 
 module.exports.logout_get = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
