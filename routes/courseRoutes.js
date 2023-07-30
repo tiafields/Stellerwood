@@ -9,7 +9,7 @@ const router = Router();
 router.post('/createCourse', requireAuth, checkRole('teacher'), courseController.createCourse);
 
 // Route to create a new course
-router.post('/course', requireAuth, courseController.createCourse);
+router.post('/course', requireAuth, checkRole('teacher'), courseController.createCourse);
 
 // Route to get all courses
 router.get('/course', courseController.getAllCourses);
@@ -18,14 +18,14 @@ router.get('/course', courseController.getAllCourses);
 router.get('/course/:id', courseController.getCourseById);
 
 // Route to get courses created by a specific user (teacher)
-router.get('/teachWelcome', requireAuth, courseController.getCoursesByUser);
+router.get('/teachWelcome', requireAuth, checkRole('teacher'), courseController.getCoursesByUser);
 
 // Route to render the course creation page (GET request)
 router.get('/createCourse', requireAuth, checkRole('teacher'), (req, res) => {
     res.render('createCourse'); // Assuming you have a view called 'createCourse' to render the page
   });
 
-router.get('/teacherCourseList', async (req, res) => {
+router.get('/teacherCourseList', requireAuth, checkRole('teacher'), async (req, res) => {
 try {
     const courses = await Course.find(); // Fetch the list of courses from the database
     res.render('teacherCourseList', { courses }); // Pass the courses data to the template

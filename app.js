@@ -5,8 +5,10 @@ const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const { checkRole } = require('./middleware/courseMiddleware');
 const { createCourse } = require('./controllers/courseController');
 const Course = require('./models/courses');
+const User = require('./models/User');
 const app = express();
 
 // middleware
@@ -52,7 +54,7 @@ app.get('/courses', (req,res) => {
       })
 });
 
-app.post('/courses', (req, res) => {
+app.post('/courses', requireAuth, checkRole('teacher'), (req, res) => {
   //use middle ware to pass data
   const course = new Course(req.body);
   
@@ -65,11 +67,11 @@ app.post('/courses', (req, res) => {
       })
 })
 //make sure you use : colon //getting id
-app.get('/courses/:id', (req, res) => {
+app.get('/courses/:id', requireAuth, (req, res) => {
   const id = req.params.id;
   Course.findById(id)
   .then(result => {
-      res.render('courseDetails', { course: result, title: 'Course Details' });
+      res.render('courseDetails', { course: result, title: 'Course Details', user: req.user });
   })
   .catch(err => {
       console.log(err);
@@ -77,7 +79,7 @@ app.get('/courses/:id', (req, res) => {
  
 })
 
-app.delete('/courses/:id', (req, res) => {
+app.delete('/courses/:id', requireAuth, checkRole('teacher'), (req, res) => {
   const id = req.params.id;
 
   Course.findByIdAndDelete(id)
@@ -91,6 +93,52 @@ app.delete('/courses/:id', (req, res) => {
 })
 
 
+// schedule
+
+app.post('/student/:studentID/add-course/:courseID', requireAuth, checkRole('student'), async (req, res) => {
+  try {
+    const student = await User.findById(req.params.studentID);
+
+    if (!student.schedule) {
+      student.schedule = [];
+    }
+
+    if (student.schedule.includes(req.param.courseID)) {
+      console.error('cannot add course twice');
+      res.status(500).send('Cannot add course twice');
+    } else {
+      student.schedule.push(req.params.courseID);
+      await student.save();
+      res.status(201).send();
+    }
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+app.post('/student/:studentID/remove-course/:courseID', requireAuth, checkRole('student'), async (req, res) => {
+  try {
+    const student = await User.findById(req.params.studentID);
+
+    if (!student.schedule) {
+      res.status(201).send();
+    }
+
+    const courseIndex = student.schedule.indexOf(req.params.courseID);
+
+    if (courseIndex >= 0) {
+      student.schedule.splice(courseIndex, 1);
+      await student.save();
+      res.status(201).send();
+    } else {
+      console.error('cannot remove course that is not in schedule');
+      res.status(500).send('cannot remove course that is not in schedule');
+    }
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 
 //keeping auth routes separate from routes code
 app.use(authRoutes);
@@ -103,11 +151,34 @@ app.get('/studWelcome', (req, res) => {
 });
 
 app.get('/studAddCourse', (req, res) => {
-  res.render('studAddCourse');
+  Course.find()
+      .then((result) => {
+          res.render('studAddCourse', { courses: result });
+      })
+      .catch((err) => {
+          console.log(err);
+      })
 });
 
-app.get('/studViewSched', (req, res) => {
-  res.render('studViewSched');
+app.get('/studViewSched', requireAuth, checkRole('student'), async (req, res) => {
+  const courseIDs = req.user?.schedule || [];
+
+  try {
+    const courses = await Course.find({
+      '_id': { 
+        $in: courseIDs,
+      }
+    });
+
+    res.render('studViewSched', {
+      user: req.user,
+      courses,
+    });
+    
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
 });
 
 

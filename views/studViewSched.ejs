@@ -11,6 +11,21 @@
         <div class="form-containter">
 
             <h1>View Schedule  </h1>
+            <% if (courses.length > 0) { %> 
+                <% courses.forEach(course => { %>
+                   <!-- getting the individual id of each course, surrounding with an anchor tag and getting id of course-->
+                   <a class="stud-course" href="/courses/<%= course._id %>">
+                   <h3 class="course-name"><%= course.teachCourseName %></h3>
+                   <p class="course-description"><%= course.teachCourseDescription %></p>
+                   
+                    </a>    <br>
+                <% }) %> 
+               <% } else { %>
+   
+                   <p>There are no courses to display...</p>
+               
+               <% } %> 
+
         </div>
     </div>
 </div>
